@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,11 +13,13 @@
 	<link rel="stylesheet" href="{{asset('backend')}}/vendor/chartist/css/chartist.min.css">
     <link href="{{asset('backend')}}/vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
 	<link href="{{asset('backend')}}/vendor/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
-
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     {{-- Datatables --}}
-    <link  href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
-    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.18/css/dataTables.bootstrap.css">
+    <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js" defer></script>
+    <link href="{{asset('backend')}}/vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
     <link href="{{asset('backend')}}/css/style.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
 
@@ -756,7 +757,7 @@
                                     </a>
                                     <a href="./page-login.html" class="dropdown-item ai-icon">
                                         <svg id="icon-logout" xmlns="http://www.w3.org/2000/svg" class="text-danger" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
-                                        <span class="ml-2">Logout </span>
+                                        <a href="{{route('logout')}}" class="ml-2">Logout</a>
                                     </a>
                                 </div>
                             </li>
@@ -781,11 +782,11 @@
 						</a>
                         <ul aria-expanded="false">
 							<li><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
-							<li><a href="patient.html">Patient</a></li>
+							<li><a href="{{route('patients.index')}}">Patient</a></li>
 							<li><a href="patient-details.html">Patient Details</a></li>
-							<li><a href="doctor.html">Doctors</a></li>
-							<li><a href="doctor-details.html">Doctor Details</a></li>
-							<li><a href="reviews.html">Reviews</a></li>
+							<li><a href="">Doctors</a></li>
+							<li><a href="">Doctor Details</a></li>
+							<li><a href="">Reviews</a></li>
 						</ul>
                     </li>
                     <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
@@ -834,7 +835,7 @@
 						</a>
                         <ul aria-expanded="false">
                             <li><a href="{{route('division.all')}}">Division</a></li>
-                            <li><a href="">District</a></li>
+                            <li><a href="{{url('district_datatable')}}">District</a></li>
                         </ul>
                     </li>
                     <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
@@ -946,9 +947,9 @@ Content body end
     ***********************************-->
     {{-- Datatables --}}
     {{-- Yajra --}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
     <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script> --}}
 
     <!-- Required vendors -->
     <script src="{{asset('backend')}}/vendor/global/global.min.js"></script>
@@ -962,7 +963,7 @@ Content body end
     <script src="{{asset('backend')}}/vendor/peity/jquery.peity.min.js"></script>
 
 	<!-- Apex Chart -->
-	<script src="{{asset('backend')}}/vendor/apexchart/apexchart.js"></script>
+	{{-- <script src="{{asset('backend')}}/vendor/apexchart/apexchart.js"></script> --}}
 
 	<!-- Dashboard 1 -->
 	<script src="{{asset('backend')}}/js/dashboard/dashboard-1.js"></script>

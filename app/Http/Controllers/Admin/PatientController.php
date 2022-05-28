@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\District;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
-class DistrictController extends Controller
+use function Ramsey\Uuid\v1;
+
+class PatientController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,21 +19,20 @@ class DistrictController extends Controller
      */
     public function index()
     {
-        $district=District::orderBy('name', 'asc')->get();
+        $patient=User::orderBy('id', 'asc')->get();
 
         if(request()->ajax()) {
-            return datatables()->of($district)
+            return datatables()->of($patient)
 
-            ->addColumn('created_at', function ($district){
-            return $district->created_at;
-            // ->diffForhumans()
+            ->addColumn('created_at', function ($patient){
+            return $patient->created_at->diffForHumans();
             })
-            ->addColumn('action', 'Admin.distric.action')
+            ->addColumn('action', 'admin.patient.action')
             ->rawColumns(['action'])
             ->addIndexColumn()
             ->make(true);
         }
-        return view('Admin.distric.index',compact('district'));
+        return view('admin.patient.index',compact('patient'));
     }
 
     /**
@@ -52,15 +55,27 @@ class DistrictController extends Controller
     {
         $companyId = $request->id;
 
-
-        $company   =   District::updateOrCreate(
+        $company   =   User::updateOrCreate(
                     [
                      'id' => $companyId
                     ],
                     [
-                    'name' => $request->name,
+                    'f_name' => $request->f_name,
+                    'l_name' => $request->l_name,
+                    'user_name' => $request->f_name.rand(1, 3000),
+                    'phone' => $request->phone,
+                    'email' => $request->email,
+                    'address' => $request->address,
                     'division_id' => $request->division_id,
+                    'district_id' => $request->district_id,
+                    'blood_group' => $request->blood_group,
+                    'age' => $request->age,
+                    'gender' => $request->gender,
+                    'status' => 1,
+                    'password' => Hash::make($request->password),
+                    'remember_token' => Str::random(40),
                     ]);
+
 
         return Response()->json($company);
     }
@@ -71,12 +86,9 @@ class DistrictController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function view(Request $request)
+    public function show($id)
     {
-        $where = array('id' => $request->id);
-        $company  = District::where($where)->first();
-
-        return Response()->json($company);
+        //
     }
 
     /**
@@ -85,13 +97,11 @@ class DistrictController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request)
+    public function edit($id)
     {
-        $where = array('id' => $request->id);
-        $company  = District::where($where)->first();
-
-        return Response()->json($company);
+        //
     }
+
     /**
      * Update the specified resource in storage.
      *
@@ -112,8 +122,8 @@ class DistrictController extends Controller
      */
     public function destroy(Request $request)
     {
-        $company = District::where('id',$request->id)->delete();
+        $users =User::where('id',$request->id)->delete();
 
-        return Response()->json($company);
+        return Response()->json($users);
     }
 }

@@ -1,9 +1,9 @@
 
 @extends('dashboard_master.admin_template')
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<link  href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
-<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<link rel="stylesheet" href="//cdn.datatables.net/1.10.18/css/dataTables.bootstrap.css">
+<script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js" defer></script>
+
 @section('division') active @endsection
 @section('main_content')
 
@@ -76,7 +76,7 @@
     <div class="modal-dialog modal-dialog-scrollable" role="document">
       <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="view">Category View</h5>
+            <h5 class="modal-title" id="view">Division View</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -112,9 +112,6 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    // $('#division_datatable').
-
-
 
     $('#division_datatable').DataTable({
     processing: true,
@@ -130,6 +127,7 @@
     order: [[0, 'desc']]
         });
     });
+
     function add(){
         $('#CompanyForm').trigger("reset");
         $('#CompanyModal').html("Category ADD");
@@ -208,4 +206,6 @@
     });
     });
     </script>
+
+
   @stop

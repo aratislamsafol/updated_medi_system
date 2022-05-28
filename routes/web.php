@@ -3,6 +3,8 @@
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DistrictController;
 use App\Http\Controllers\Admin\DivisionController;
+use App\Http\Controllers\Admin\PatientController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +26,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('logout',[HomeController::class,'logout'])->name('logout');
 // ============================= Division ======================================
 Route::get('division_datatable', [DivisionController::class,'index'])->name('division.all');
 Route::post('store-division', [DivisionController::class,'store']);
@@ -43,3 +46,7 @@ Route::get('get-districts/{id}', function($id){
     return json_encode(App\Models\District::where('division_id', $id)->get());
 });
 Route::get('admin/dash',[DashboardController::class,'index'])->name('admin.dashboard');
+
+//==============================Patient==========================================
+Route::resource('patients', PatientController::class);
+Route::post('delete/patient', [PatientController::class,'destroy'])->name('patients.destroy');

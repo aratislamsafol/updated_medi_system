@@ -12,4 +12,9 @@ class Division extends Model
     protected $fillable = [
         'name', 'priority'
     ];
+
+    public function districts()
+    {
+        return $this->hasMany(District::class);
+    }
 }

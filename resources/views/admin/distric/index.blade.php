@@ -1,8 +1,8 @@
-@extends('Admin.template_master');
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<link  href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
-<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+
+@extends('dashboard_master.admin_template')
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<link rel="stylesheet" href="//cdn.datatables.net/1.10.18/css/dataTables.bootstrap.css">
+<script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js" defer></script>
 @section('district') active @endsection
 @section('main_content')
 
@@ -25,7 +25,7 @@
             <thead>
                 <tr>
                     <th>Id</th>
-                    <th>Distric Name</th>
+                    <th>Name</th>
                     <th>Division Id</th>
                     <th>Created at</th>
                     <th>Action</th>
@@ -45,9 +45,9 @@
                 <form action="javascript:void(0)" id="CompanyForm" name="CompanyForm" class="form-horizontal" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="id" id="id">
                     <div class="form-group">
-                        <label for="name" class="col-sm-2 control-label">Division Name</label>
+                        <label for="name" class="col-sm-2 control-label">District Name</label>
                         <div class="col-sm-12">
-                            <input type="text" class="form-control" id="district_name" name="district_name" placeholder="Enter Divison Name" maxlength="50" required="">
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Enter Divison Name" maxlength="50" required="">
                         </div>
                     </div>
 
@@ -55,13 +55,13 @@
                         <label for="division_id">Select a division for this district</label>
                         <div class="col-sm-12">
                             @php
-                                $divisions = App\Models\Division::orderBy('prioroty', 'asc')->get();
+                                $divisions = App\Models\Division::orderBy('priority', 'asc')->get();
                             @endphp
                             <select class="form-control" name="division_id">
                             <option value="">Please select a division for the district</option>
 
                             @foreach ($divisions as $division)
-                                <option value="{{ $division->id }}" id="division_id">{{ $division->division_name }}</option>
+                                <option value="{{ $division->id }}" id="division_id">{{ $division->name }}</option>
                             @endforeach
                             </select>
                         </div>
@@ -101,7 +101,7 @@
     ajax: "{{ url('district_datatable') }}",
     columns: [
     { data: 'id', name: 'id' },
-    { data: 'district_name', name: 'district_name' },
+    { data: 'name', name: 'name' },
     { data: 'division_id', name: 'division_id' },
     { data: 'created_at', name: 'created_at' },
     {data: 'action', name: 'action', orderable: false},
@@ -142,7 +142,7 @@
             $('#CompanyModal').html("Edit Division");
             $('#company-modal').modal('show');
             $('#id').val(res.id);
-            $('#district_name').val(res.district_name);
+            $('#name').val(res.name);
             $('#division_id').val(res.division_id);
         }
     });
