@@ -13,12 +13,13 @@
 	<link rel="stylesheet" href="{{asset('backend')}}/vendor/chartist/css/chartist.min.css">
     <link href="{{asset('backend')}}/vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
 	<link href="{{asset('backend')}}/vendor/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     {{-- Datatables --}}
 
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.18/css/dataTables.bootstrap.css">
     <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js" defer></script>
+
+
     <link href="{{asset('backend')}}/vendor/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
     <link href="{{asset('backend')}}/css/style.css" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
@@ -947,10 +948,8 @@ Content body end
     ***********************************-->
     {{-- Datatables --}}
     {{-- Yajra --}}
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
-    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script> --}}
 
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Required vendors -->
     <script src="{{asset('backend')}}/vendor/global/global.min.js"></script>
 	<script src="{{asset('backend')}}/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>

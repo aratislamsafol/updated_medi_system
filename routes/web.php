@@ -49,4 +49,7 @@ Route::get('admin/dash',[DashboardController::class,'index'])->name('admin.dashb
 
 //==============================Patient==========================================
 Route::resource('patients', PatientController::class);
-Route::post('delete/patient', [PatientController::class,'destroy'])->name('patients.destroy');
+Route::get('patient/index',[PatientController::class,'index'])->name('patient.index');
+Route::get('/patient/all',[PatientController::class,'getall'])->name('getall.patient');
+
+

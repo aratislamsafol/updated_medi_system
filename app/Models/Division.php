@@ -17,4 +17,6 @@ class Division extends Model
     {
         return $this->hasMany(District::class);
     }
+
+
 }

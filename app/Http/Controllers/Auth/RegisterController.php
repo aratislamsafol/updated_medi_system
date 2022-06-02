@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\District;
+use App\Models\Division;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -42,6 +44,18 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+
+    /**
+     * @override
+     * Show registrationform override
+     * Compact Distric & Divison for Registration Page
+     */
+    public function showRegistrationForm()
+    {
+        $districts = District::orderBy('district_name', 'asc')->get();
+        $divisions = Division::orderBy('priority', 'asc')->get();
+        return view('auth.register',compact('districts','divisions'));
+    }
     /**
      * Get a validator for an incoming registration request.
      *
