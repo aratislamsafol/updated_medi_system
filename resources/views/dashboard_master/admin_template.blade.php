@@ -15,7 +15,7 @@
 	<link href="{{asset('backend')}}/vendor/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
     {{-- Datatables --}}
 
-  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <link rel="stylesheet" href="//cdn.datatables.net/1.10.18/css/dataTables.bootstrap.css">
     <script src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js" defer></script>
 

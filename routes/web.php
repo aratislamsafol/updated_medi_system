@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DistrictController;
 use App\Http\Controllers\Admin\DivisionController;
 use App\Http\Controllers\Admin\PatientController;
+use App\Http\Controllers\Frontend\UserController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -25,8 +26,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('admin.dashboard');
 Route::get('logout',[HomeController::class,'logout'])->name('logout');
+Route::get('logout',[DashboardController::class,'logout'])->name('logout');
 // ============================= Division ======================================
 Route::get('division_datatable', [DivisionController::class,'index'])->name('division.all');
 Route::post('store-division', [DivisionController::class,'store']);
@@ -45,11 +47,14 @@ Route::get('view-distric', [DistrictController::class,'view']);
 Route::get('get-districts/{id}', function($id){
     return json_encode(App\Models\District::where('division_id', $id)->get());
 });
-Route::get('admin/dash',[DashboardController::class,'index'])->name('admin.dashboard');
+
 
 //==============================Patient==========================================
 Route::resource('patients', PatientController::class);
 Route::get('patient/index',[PatientController::class,'index'])->name('patient.index');
 Route::get('/patient/all',[PatientController::class,'getall'])->name('getall.patient');
+
+// ========================= Frontend ============================================
+Route::get('home/index',[UserController::class,'index']);
 
 

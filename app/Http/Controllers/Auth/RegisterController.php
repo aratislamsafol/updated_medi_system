@@ -52,7 +52,7 @@ class RegisterController extends Controller
      */
     public function showRegistrationForm()
     {
-        $districts = District::orderBy('district_name', 'asc')->get();
+        $districts = District::orderBy('name', 'asc')->get();
         $divisions = Division::orderBy('priority', 'asc')->get();
         return view('auth.register',compact('districts','divisions'));
     }
@@ -80,7 +80,7 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'f_name' => $data['name'],
+            'f_name' => $data['f_name'],
             'l_name' => $data['l_name'],
             'user_name' => $data['l_name'].rand(1, 3000),
             'phone' => $data['phone'],
